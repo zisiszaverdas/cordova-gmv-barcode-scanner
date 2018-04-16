@@ -194,23 +194,11 @@ public class CameraSourcePreview extends ViewGroup {
         final int layoutWidth = right - left;
         final int layoutHeight = bottom - top;
 
-        // Computes height and width for potentially doing fit width.
-
-        int childHeight = layoutHeight;
-        int childWidth = (int)(((float) layoutHeight / (float) height) * width);
-        int leftOffset = ((int)((float) layoutHeight / (float) height) * width - childWidth) / 2;
-        int topOffset = 0;
-
-
-        if (childHeight > layoutHeight) {
-            childWidth = layoutWidth;
-            childHeight = (int)(((float) layoutWidth / (float) width) * height);
-
-            leftOffset = 0;
-            topOffset = ((int)((float) layoutWidth / (float) width) * height - childHeight) / 2;
+        for (int i = 0; i < getChildCount(); ++i) {
+            getChildAt(i).layout(0, 0, layoutWidth, layoutHeight);
         }
 
-        mSurfaceView.layout(leftOffset, topOffset, childWidth, childHeight);
+        mSurfaceView.layout(0, 0, layoutWidth, layoutHeight);
 
 
         int actualWidth = (int) (layoutWidth*ViewFinderWidth);
