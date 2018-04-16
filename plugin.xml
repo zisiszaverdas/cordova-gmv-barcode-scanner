@@ -2,6 +2,10 @@
 <plugin id="cordova-gmv-barcode-scanner" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android">
     <name>cordova-gmv-barcode-scanner</name>
+	<engines>
+		<engine name="cordova" version=">=7.1.0"/>
+		<engine name="cordova-android" version=">=7.0.0"/>
+	</engines>
     <js-module name="cordova-gmv-barcode-scanner" src="www/main.js">
         <clobbers target="cordova.plugins.gmv-barcode-scanner"/>
     </js-module>
@@ -26,11 +30,7 @@
                 <param name="android-package" value="com.dealrcloud.gmvScanner.CDVAndroidScanner"/>
             </feature>
         </config-file>
-
-        <config-file parent="/*" target="config.xml">
-            <preference name="android-manifest/application/@android:theme" value="@style/Theme.AppCompat" />
-        </config-file>
-
+		
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.CAMERA" />
         </config-file>
@@ -42,13 +42,8 @@
                     android:name="com.google.android.gms.vision.DEPENDENCIES"
                     android:value="barcode" />
 
-            <activity android:label="@string/title_activity_main" android:name="com.dealrcloud.gmvScanner.SecondaryActivity">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-            <activity android:label="Read Barcode" android:name="com.dealrcloud.gmvScanner.BarcodeCaptureActivity" />
+            <activity android:label="@string/title_activity_main" android:configChanges="orientation|screenSize|keyboardHidden" android:name="com.dealrcloud.gmvScanner.SecondaryActivity" android:theme="@style/Theme.AppCompat"/>
+            <activity android:label="Read Barcode" android:name="com.dealrcloud.gmvScanner.BarcodeCaptureActivity"  android:theme="@style/Theme.AppCompat"/>
 
         </config-file>
 
@@ -68,18 +63,19 @@
         </config-file>
 
         <source-file src="src/android/src/gmvScanner"
-                     target-dir="src/com/dealrcloud"/>
+                     target-dir="app/src/main/java/com/dealrcloud"/>
 
         <resource-file src="src/android/res/layout"
                        target="res/layout"/>
         <resource-file src="src/android/res/drawable"
                        target="res/drawable"/>
 
-        <framework src="com.android.support:support-v4:24.2.0" />
+        <framework src="com.android.support:support-v4:$ANDROID_SUPPORT_V4_VERSION" />
         <framework src="com.google.android.gms:play-services-vision:11.0.1+" />
-        <framework src="com.android.support:design:24.2.0" />
-
+        <framework src="com.android.support:design:$ANDROID_SUPPORT_V4_VERSION" />
+		
+		<preference name="ANDROID_SUPPORT_V4_VERSION" default="27.+"/>
         <source-file src="src/android/build-extras.gradle" target-dir="../android" />
     </platform>
-    <dependency id="cordova-custom-config" url="https://github.com/dpa99c/cordova-custom-config.git"  />
+    <!-- <dependency id="cordova-custom-config" url="https://github.com/dpa99c/cordova-custom-config.git"  /> -->
 </plugin>

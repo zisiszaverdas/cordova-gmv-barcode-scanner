@@ -5,19 +5,24 @@
   "cordova": {
     "id": "cordova-gmv-barcode-scanner",
     "platforms": [
-      "ios"
+      "ios",
+	  "android"
     ]
   },
   "keywords": [
     "ecosystem:cordova",
-    "cordova-ios"
+    "cordova-ios",
+    "cordova-android",
+    "cordova:plugin"
   ],
-  "engines": [
-    {
-      "name": "cordova",
-      "version": ">=3.0.0"
+  "engines": {
+    "cordovaDependencies": {
+      "7.1.0": {
+        "cordova-android": ">=7.0.0",
+        "cordova": ">=7.1.0"
+      }
     }
-  ],
+  },
   "author": "Forrest Middleton",
   "license": "MIT"
 }
